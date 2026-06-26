@@ -1,14 +1,16 @@
 {
   "name": "@quantity-digital/analytics-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple dataLayer analytics wrapper",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "release": "commit-and-tag-version",
     "prepare": "npm run build"
   },
   "devDependencies": {
+    "commit-and-tag-version": "^12.7.3",
     "typescript": "^6.0.0"
   }
 }
