@@ -177,7 +177,7 @@ type Search = {
    * The term that was searched for
    * Example: 't-shirts'
    */
-  searchTerm: string;
+  search_term: string;
 };
 
 const trackSearch = (data: Search) => {
