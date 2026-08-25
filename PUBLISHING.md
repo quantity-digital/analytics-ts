@@ -60,3 +60,11 @@ release commit, and tags it. The pushed `vX.Y.Z` tag starts the publish workflow
 
 Before pushing, verify that the generated release commit and version are what
 you intended. npm versions are immutable after publication.
+
+## Manually retrying a release
+
+If a tag was pushed but GitHub did not create a workflow run, open **Actions >
+Publish to npm**, select **Run workflow**, choose the `main` branch, and enter
+the version from `package.json`. The workflow verifies the requested version
+before publishing, so this does not require deleting or recreating a release
+tag.

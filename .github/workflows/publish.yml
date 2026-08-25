@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Package version to publish (for example, 1.0.2)"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -32,14 +38,22 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Verify tag matches package version
+      - name: Verify release version
         shell: bash
+        env:
+          requested_version: "${{ inputs.version }}"
         run: |
           package_version="$(node -p "require('./package.json').version")"
-          tag_version="${GITHUB_REF_NAME#v}"
 
-          if [[ "$tag_version" != "$package_version" ]]; then
-            echo "Tag version $tag_version does not match package version $package_version"
+          if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+            tag_version="${GITHUB_REF_NAME#v}"
+
+            if [[ "$tag_version" != "$package_version" ]]; then
+              echo "Tag version $tag_version does not match package version $package_version"
+              exit 1
+            fi
+          elif [[ "$requested_version" != "$package_version" ]]; then
+            echo "Requested version $requested_version does not match package version $package_version"
             exit 1
           fi
 
