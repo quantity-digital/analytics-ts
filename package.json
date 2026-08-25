@@ -2,12 +2,37 @@
   "name": "@quantity-digital/analytics-ts",
   "version": "1.0.1",
   "description": "Simple dataLayer analytics wrapper",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quantity-digital/analytics-ts.git"
+  },
+  "homepage": "https://github.com/quantity-digital/analytics-ts#readme",
+  "bugs": {
+    "url": "https://github.com/quantity-digital/analytics-ts/issues"
+  },
+  "keywords": [
+    "analytics",
+    "data-layer",
+    "google-analytics",
+    "google-tag-manager",
+    "typescript"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "tsc",
+    "pack:check": "npm pack --dry-run",
+    "prepack": "npm run build",
     "release": "commit-and-tag-version",
-    "prepare": "npm run build"
+    "release:dry-run": "commit-and-tag-version --dry-run"
   },
   "devDependencies": {
     "commit-and-tag-version": "^12.7.3",
